@@ -1,4 +1,5 @@
-﻿using EZServer.Managers;
+﻿using EZClient.Models;
+using EZServer.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,9 @@ namespace EZServer.Windows
             int splitIndex = _message.IndexOf("🌌");
             string user = _message.Substring(0, splitIndex);
             string message = _message.Replace($"{user}🌌", "");
+
+            lvMessages.Items.Add(new MessageItem{ User = user, Message = message });
+
             Console.WriteLine(user + ": "+message);
         }
 
