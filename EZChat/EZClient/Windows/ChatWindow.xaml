@@ -9,5 +9,13 @@
     <Grid>
         <TextBox Name="txtMessage" KeyDown="txtMessage_KeyDown" Margin="0,0,48,0" TextWrapping="Wrap" Height="32" VerticalAlignment="Bottom"/>
         <Button Name="btnSendMessage" Click="btnSendMessage_Click" Content="Send" BorderThickness="0,0,0,0" Background="#323232" Foreground="#FFFFFF" HorizontalAlignment="Right" Width="48" Height="32" VerticalAlignment="Bottom"/>
+        <ListView Name="lvMessages" Margin="0,0,0,32">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="User" HeaderStringFormat="User"/>
+                    <GridViewColumn HeaderStringFormat="Message" Header="Message"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

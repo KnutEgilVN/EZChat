@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
+using System.Windows;
 
 namespace EZServer.Managers
 {
@@ -29,29 +30,44 @@ namespace EZServer.Managers
 
         public void Send(string message)
         {
-            socket.Send(Encoding.UTF8.GetBytes(message));
+            try
+            {
+                socket.Send(Encoding.UTF8.GetBytes(message));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured,\nplease restart the application.");
+            }
         }
         public void BeginReceiveCallback(IAsyncResult ar)
         {
-            int available = socket.Available;
-            int received = socket.EndReceive(ar);
-
-            if(available > 0)
+            try
             {
-                Console.WriteLine("Not finished reading data!");
-                dataBuffer.AddRange(buffer);
-                buffer = new byte[1024];
-                socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, BeginReceiveCallback, null);
+                int available = socket.Available;
+                int received = socket.EndReceive(ar);
+
+                if(available > 0)
+                {
+                    Console.WriteLine("Not finished reading data!");
+                    dataBuffer.AddRange(buffer);
+                    buffer = new byte[1024];
+                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, BeginReceiveCallback, null);
+                }
+                else
+                {
+                    dataBuffer.AddRange(buffer);
+                    buffer = new byte[1024];
+                    dataBuffer.RemoveAll(b => b == 0);
+                    string message = Encoding.UTF8.GetString(dataBuffer.ToArray());
+                    dataBuffer.Clear();
+
+                    MessageReceived(message);
+                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, BeginReceiveCallback, null);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                dataBuffer.AddRange(buffer);
-                buffer = new byte[1024];
-                string message = Encoding.UTF8.GetString(dataBuffer.ToArray());
-                dataBuffer.Clear();
-
-                MessageReceived(message);
-                socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, BeginReceiveCallback, null);
+                MessageBox.Show("An error occured,\nplease restart the application.");
             }
         }
     }

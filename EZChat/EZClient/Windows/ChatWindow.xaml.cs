@@ -36,11 +36,14 @@ namespace EZServer.Windows
         public void SendMessage(string message)
         {
             txtMessage.Clear();
-            Client.Send(message);
+            Client.Send($"{Username}🌌{message}");
         }
-        public void ReceivedMessage(string message)
+        public void ReceivedMessage(string _message)
         {
-            Console.WriteLine(message);
+            int splitIndex = _message.IndexOf("🌌");
+            string user = _message.Substring(0, splitIndex);
+            string message = _message.Replace($"{user}🌌", "");
+            Console.WriteLine(user + ": "+message);
         }
 
         private void txtMessage_KeyDown(object sender, KeyEventArgs e)
