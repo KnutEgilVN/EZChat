@@ -1,0 +1,52 @@
+﻿<Window x:Class="EZServer.Windows.LaunchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EZServer.Windows"
+        mc:Ignorable="d"
+        Title="Launcher" Background="#242424" Height="150" Width="250" WindowStyle="None" ResizeMode="NoResize">
+    <Grid>
+        <Rectangle Name="rectDragable"
+            Height="8"
+            Margin="0,0,0,0" 
+            VerticalAlignment="Top"
+            Fill="#FFFFFF" 
+            Stroke="#242424"
+            StrokeThickness="1"
+            MouseDown="rectDragable_MouseDown"/>
+        <Button Name="btnContinue"
+            Content="Continue" 
+            Height="40" 
+            BorderThickness="0, 0, 0, 0"
+            Foreground="#FFFFFF" 
+            Background="#242424" 
+            BorderBrush="#242424" 
+            VerticalAlignment="Bottom"
+            FontSize="16" 
+            VerticalContentAlignment="Center"
+            Click="btnContinue_Click"/>
+        <TextBox Name="txtUsername"
+            Text="Ola Nordmann"
+            BorderThickness="0, 0, 0, 0"
+            BorderBrush="#242424"
+            HorizontalContentAlignment="Center" 
+            VerticalContentAlignment="Center"
+            Margin="0,0,0,40" 
+            TextWrapping="Wrap"
+            FontSize="16"
+            Height="32" 
+            VerticalAlignment="Bottom"/>
+        <Label Name="lblEnterName"
+            Margin="0,0,0,72"
+            Content="Enter your name" 
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Foreground="#FFFFFF" 
+            Background="#242424" 
+            FontSize="26" 
+            Height="69" 
+            VerticalAlignment="Bottom"/>
+   
+        </Grid>
+</Window>
